@@ -13,7 +13,7 @@ export const fetchSensorData = async (range: string = '-10s') => {
   const query = `
     from(bucket: "${bucket}")
     |> range(start: ${range})
-    |> filter(fn: (r) => r._measurement == "bench_env")
+    |> filter(fn: (r) => r._measurement == "mqtt_consumer")
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
     |> keep(columns: ["_time", "temp", "hum", "lux", "noise_db"])
   `;
