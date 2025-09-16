@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import StatCard, { type StatCardProps } from '../components/StatCard';
-import { fetchSensorData } from '../api/influxdb';
+import StatCard, { type StatCardProps } from '@/components/features/dashboard/StatCard';
+import { fetchSensorData } from '@/api/influxdb';
 import { CircularProgress, Typography } from '@mui/material';
-import TelemetriaChart from '../components/TelemetriaChart';
+import TelemetriaChart from "@/components/features/dashboard/TelemetriaChart";
 
 interface SensorData {
   _time: string;
