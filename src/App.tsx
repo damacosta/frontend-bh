@@ -1,13 +1,15 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import BasicGrid from "./pages/BasicGrid";
 import Dashboard from "./pages/Dashboard";
+import LoginPage from "./pages/LoginPage";
+import History from "./pages/History";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/grid" element={<BasicGrid />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/historico" element={<History />} />
+        <Route path="/" element={<Dashboard />} />
       </Routes>
     </Router>
   );

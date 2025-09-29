@@ -16,7 +16,7 @@ export type StatCardProps = {
   trend: 'up' | 'down' | 'neutral';
   percent: string;
   data: number[];
-  timesSeries: string[];
+  timesSeries?: string[];
 };
 
 function AreaGradient({ color, id }: { color: string; id: string }) {

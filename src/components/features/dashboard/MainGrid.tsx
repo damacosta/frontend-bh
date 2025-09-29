@@ -122,14 +122,14 @@ export default function MainGrid() {
 
       <Grid container spacing={2} columns={12} sx={{ mb: (theme) => theme.spacing(2) }}>
         {cardData.map((card, index) => (
-          <Grid key={index} item xs={12} sm={6} lg={3}>
+          <Grid key={index} size={{xs:12, sm:6, lg:3}} >
             {/* Passe percent para exibir no card */}
             <StatCard {...card} />
           </Grid>
         ))}
 
         {/* TelemetriaChart */}
-        <Grid item xs={12}>
+        <Grid size={{xs: 12}}>
           <TelemetriaChart
             dados={cardData}
             timesSeries={dados?.map((item) => item._time) ?? []}
@@ -141,10 +141,10 @@ export default function MainGrid() {
         Detalhes
       </Typography>
       <Grid container spacing={2} columns={12}>
-        <Grid item xs={12} lg={9}>
+        <Grid size={{ xs: 12, lg: 9}}>
           <DataTable />
         </Grid>
-        <Grid item xs={12} lg={3}>
+        <Grid size={{ xs: 12, lg: 3}}>
           <Stack gap={2} direction={{ xs: 'column', sm: 'row', lg: 'column' }}>
             {/* Pode adicionar filtros ou cards extras */}
           </Stack>
