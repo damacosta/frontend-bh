@@ -4,7 +4,7 @@ import MuiDrawer, { drawerClasses } from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import MenuContent from "@/components/ui/MenuContent";
-import logo from "@/assets/logo.svg";
+import logo from "/assets/bh.svg";
 
 const drawerWidth = 240;
 

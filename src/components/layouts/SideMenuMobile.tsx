@@ -1,5 +1,3 @@
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
 import Drawer, { drawerClasses } from '@mui/material/Drawer';
@@ -8,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import MenuContent from '@/components/ui/MenuContent';
 import Box from '@mui/material/Box';
-import logo from "@/assets/logo.svg";
+import logo from "/assets/bh.svg";
 
 interface SideMenuMobileProps {
   open: boolean | undefined;
