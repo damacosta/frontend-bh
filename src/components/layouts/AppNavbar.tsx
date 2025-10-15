@@ -11,6 +11,8 @@ import DashboardRoundedIcon from '@mui/icons-material/DashboardRounded';
 import SideMenuMobile from '@/components/layouts/SideMenuMobile';
 import MenuButton from '@/components/ui/MenuButton';
 import ColorModeIconDropdown from '@/components/ui/ColorModeIconDropdown';
+import { useAuth0 } from "@auth0/auth0-react";
+
 
 const Toolbar = styled(MuiToolbar)({
   width: '100%',
@@ -30,9 +32,14 @@ const Toolbar = styled(MuiToolbar)({
 
 export default function AppNavbar() {
   const [open, setOpen] = React.useState(false);
+  const { logout } = useAuth0(); // 👈 hook do Auth0
 
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);
+  };
+
+  const handleLogout = () => {
+    logout({ returnTo: window.location.origin }); // redireciona para a home
   };
 
   return (
@@ -68,7 +75,14 @@ export default function AppNavbar() {
               Painel
             </Typography>
           </Stack>
+
           <ColorModeIconDropdown />
+
+          {/* Botão de Logout */}
+          <MenuButton aria-label="logout" onClick={handleLogout}>
+            Logout
+          </MenuButton>
+
           <MenuButton aria-label="menu" onClick={toggleDrawer(true)}>
             <MenuRoundedIcon />
           </MenuButton>
@@ -78,6 +92,7 @@ export default function AppNavbar() {
     </AppBar>
   );
 }
+
 
 export function CustomIcon() {
   return (

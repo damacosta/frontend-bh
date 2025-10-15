@@ -6,11 +6,19 @@ import 'dayjs/locale/pt-br';
 import NavbarBreadcrumbs from '@/components/ui/NavbarBreadcrumbs';
 import ColorModeIconDropdown from '@/components/ui/ColorModeIconDropdown';
 import Search from '@/components/ui/Search';
+import { useAuth0 } from "@auth0/auth0-react";
+import Button from "@mui/material/Button";
+
 
 dayjs.locale('pt-br');
 
 export default function Header() {
   const today = dayjs().format('dddd, DD [de] MMMM [de] YYYY');
+  const { logout } = useAuth0(); // 👈 hook do Auth0
+
+  const handleLogout = () => {
+    logout({ returnTo: window.location.origin }); // redireciona para home
+  };
 
   return (
     <Stack
@@ -32,9 +40,19 @@ export default function Header() {
         </Typography>
       </Stack>
 
-      <Stack direction="row" sx={{ gap: 1 }}>
+      <Stack direction="row" sx={{ gap: 1, alignItems: 'center' }}>
         <Search />
         <ColorModeIconDropdown />
+
+        {/* Botão de Logout */}
+        <Button
+          variant="outlined"
+          color="error"
+          size="small"
+          onClick={handleLogout}
+        >
+          Logout
+        </Button>
       </Stack>
     </Stack>
   );
