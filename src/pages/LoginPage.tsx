@@ -15,6 +15,15 @@ const LoginPage = () => {
     loginWithRedirect({ appState: { returnTo: fromPath } });
   };
 
+  const handleRegister = () => {
+    loginWithRedirect({ screen_hint: "signup", appState: { returnTo: fromPath } });
+  };
+
+  const handleResetPassword = () => {
+    loginWithRedirect({ screen_hint: "reset_password" });
+  };
+
+
   return (
     <Grid
       container
@@ -70,13 +79,47 @@ const LoginPage = () => {
             >
               Entrar com Auth0
             </Button>
-
             <Typography variant="body2" align="center">
               Não tem conta?{" "}
-              <Link to="/" style={{ color: "#fff" }}>
+              <Box
+                component="button"
+                onClick={handleRegister}
+                sx={{
+                  background: "none",
+                  border: "none",
+                  padding: 0,
+                  margin: 0,
+                  color: "#fff",
+                  textDecoration: "underline",
+                  cursor: "pointer",
+                  fontSize: "inherit",
+                  fontFamily: "inherit",
+                }}
+              >
                 Registre-se
-              </Link>
+              </Box>
             </Typography>
+            <Typography variant="body2" align="center" sx={{ mt: 1 }}>
+              Esqueceu a senha?{" "}
+              <Box
+                component="button"
+                onClick={handleResetPassword}
+                sx={{
+                  background: "none",
+                  border: "none",
+                  padding: 0,
+                  margin: 0,
+                  color: "#fff",
+                  textDecoration: "underline",
+                  cursor: "pointer",
+                  fontSize: "inherit",
+                  fontFamily: "inherit",
+                }}
+              >
+                Clique aqui
+              </Box>
+            </Typography>
+
           </Box>
         </Container>
       </Grid>
