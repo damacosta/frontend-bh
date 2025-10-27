@@ -9,4 +9,8 @@ export default defineConfig({
       '@': resolve(__dirname, './src/'),
     },
   },
+  server:{
+    hms: true,
+    allowedHosts:["techsense"]
+  }
 });

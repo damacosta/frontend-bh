@@ -8,6 +8,7 @@ function App() {
       <Routes>
         <Route path="/grid" element={<BasicGrid />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/" element={<Dashboard />} />
       </Routes>
     </Router>
   );
