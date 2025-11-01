@@ -12,6 +12,7 @@ import autoTable from "jspdf-autotable";
 import SideMenu from "@/components/layouts/SideMenu";
 import { fetchSensorData } from "@/api/influxdb";
 import dayjs from "dayjs";
+import { useTempo } from "@/TempoContext";
 
 type SensorData = {
   _time: string;
@@ -19,6 +20,7 @@ type SensorData = {
   hum: number;
   lux: number;
   noise_db: number;
+  co2: number;
 }
 
 const columns: MRT_ColumnDef<SensorData>[] = [
@@ -27,15 +29,17 @@ const columns: MRT_ColumnDef<SensorData>[] = [
   { accessorKey: "hum", header: "Umidade (%)", size: 120 },
   { accessorKey: "lux", header: "Luminosidade (lx)", size: 140 },
   { accessorKey: "noise_db", header: "Ruído (dB)", size: 120 },
+  { accessorKey: "co2", header: "CO² (ppm)", size: 120 },
 ];
 
 export default function History() {
+  const { timeRange } = useTempo();
   const [dados, setDados] = useState<SensorData[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await fetchSensorData("-60s"); // últimos 60 segundos
+        const data = await fetchSensorData(timeRange);
         if (data.length > 0) {
           const formatted = data.map((d: SensorData) => ({
             ...d,

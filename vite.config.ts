@@ -9,4 +9,9 @@ export default defineConfig({
       '@': resolve(__dirname, './src/'),
     },
   },
+  server:{
+    host: true,
+    port: 5173,
+    allowedHosts:["techsense", "host.docker.internal"]
+  }
 });

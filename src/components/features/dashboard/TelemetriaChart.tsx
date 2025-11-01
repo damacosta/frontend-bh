@@ -7,6 +7,7 @@ import Stack from '@mui/material/Stack';
 import { LineChart } from '@mui/x-charts/LineChart';
 import type { StatCardProps } from '@/components/features/dashboard/StatCard';
 import dayjs from 'dayjs';
+import { useTempo } from '@/TempoContext';
 
 function AreaGradient({ color, id }: { color: string; id: string }) {
   return (
@@ -27,6 +28,7 @@ export default function TelemetriaChart({
   timesSeries?: string[];
 }) {
   const theme = useTheme();
+  const { description } = useTempo();
 
   const formattedTimes = timesSeries.map(ts => dayjs(ts).format('HH:mm:ss'));
 
@@ -66,7 +68,7 @@ export default function TelemetriaChart({
             }}
           />
           <Typography variant="caption" sx={{ color: 'text.secondary' }}>
-            Telemetria dos últimos 60 segundos
+            Telemetria : {description}
           </Typography>
         </Stack>
 

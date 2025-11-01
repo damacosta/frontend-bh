@@ -1,4 +1,3 @@
-import * as React from "react";
 import { Link } from "react-router-dom";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -7,14 +6,11 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Stack from "@mui/material/Stack";
 
+
 // Ícones do Material UI
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import HistoryIcon from "@mui/icons-material/History";
-import PeopleRoundedIcon from "@mui/icons-material/PeopleRounded";
-import AssignmentRoundedIcon from "@mui/icons-material/AssignmentRounded";
-import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
-import InfoRoundedIcon from "@mui/icons-material/InfoRounded";
-import HelpRoundedIcon from "@mui/icons-material/HelpRounded";
+import ConfiguracaoTempo from "./ConfiguracaoTempo";
 
 const mainListItems = [
   { text: "Página Inicial", icon: <HomeRoundedIcon />, path: "/" },
@@ -23,11 +19,6 @@ const mainListItems = [
   // { text: "Tarefas", icon: <AssignmentRoundedIcon />, path: "/tarefas" },
 ];
 
-const secondaryListItems = [
-  { text: "Configurações", icon: <SettingsRoundedIcon />, path: "/configuracoes" },
-  // { text: "Sobre", icon: <InfoRoundedIcon />, path: "/sobre" },
-  // { text: "Feedback", icon: <HelpRoundedIcon />, path: "/feedback" },
-];
 
 export default function MenuContent() {
   return (
@@ -49,16 +40,7 @@ export default function MenuContent() {
       </List>
 
       {/* Lista secundária */}
-      <List dense>
-        {secondaryListItems.map((item, index) => (
-          <ListItem key={index} disablePadding sx={{ display: "block" }}>
-            <ListItemButton component={Link} to={item.path}>
-              <ListItemIcon>{item.icon}</ListItemIcon>
-              <ListItemText primary={item.text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
+       <ConfiguracaoTempo />
     </Stack>
   );
 }

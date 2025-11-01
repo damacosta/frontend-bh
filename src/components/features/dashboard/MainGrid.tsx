@@ -13,6 +13,7 @@ import StatCard from '@/components/features/dashboard/StatCard';
 import type { StatCardProps } from '@/components/features/dashboard/StatCard';
 import TelemetriaChart from '@/components/features/dashboard/TelemetriaChart';
 import DataTable from '@/components/features/dashboard/DataTable';
+import { useTempo } from '@/TempoContext';
 
 interface SensorData {
   _time: string;
@@ -20,12 +21,14 @@ interface SensorData {
   hum: number;
   lux: number;
   noise_db: number;
+  co2: number;
 }
 
 export default function MainGrid() {
   const [latestData, setLatestData] = useState<SensorData | null>(null);
   const [dados, setDados] = useState<SensorData[] | null>(null);
   const [loading, setLoading] = useState(true);
+  const { timeRange, description } = useTempo();
 
   type NumericFields = Exclude<keyof SensorData, '_time'>;
 
@@ -54,7 +57,7 @@ export default function MainGrid() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await fetchSensorData('-60s'); // últimos 60 segundos
+        const data = await fetchSensorData(timeRange);
         if (data.length > 0) {
           setDados(data);
           setLatestData(data[data.length - 1]);
@@ -69,7 +72,7 @@ export default function MainGrid() {
     fetchData();
     // const interval = setInterval(fetchData, 5000);
     // return () => clearInterval(interval);
-  }, []);
+  }, [timeRange]);
 
   if (loading || !latestData) {
     return (
@@ -87,30 +90,37 @@ export default function MainGrid() {
     {
       title: 'Temperatura',
       value: `${latestData.temp?.toFixed(1) ?? 'N/A'} °C`,
-      interval: 'Último 1 minuto',
+      interval: description,
       ...getTrend('temp'), // adiciona trend e percent
       data: getValues('temp'),
     },
     {
       title: 'Umidade',
       value: `${latestData.hum?.toFixed(0) ?? 'N/A'} %`,
-      interval: 'Último 1 minuto',
+      interval: description,
       ...getTrend('hum'),
       data: getValues('hum'),
     },
     {
       title: 'Luminosidade',
       value: `${latestData.lux?.toFixed(0) ?? 'N/A'} Lux`,
-      interval: 'Último 1 minuto',
+      interval: description,
       ...getTrend('lux'),
       data: getValues('lux'),
     },
     {
       title: 'Ruído',
       value: `${latestData.noise_db?.toFixed(0) ?? 'N/A'} dB`,
-      interval: 'Último 1 minuto',
+      interval: description,
       ...getTrend('noise_db'),
       data: getValues('noise_db'),
+    },
+    {
+      title: 'CO²',
+      value: `${latestData.co2?.toFixed(0) ?? 'N/A'} ppm`,
+      interval: description,
+      ...getTrend('co2'),
+      data: getValues('co2'),
     },
   ];
 
@@ -134,20 +144,6 @@ export default function MainGrid() {
             dados={cardData}
             timesSeries={dados?.map((item) => item._time) ?? []}
           />
-        </Grid>
-      </Grid>
-
-      <Typography component="h2" variant="h6" sx={{ mb: 2 }}>
-        Detalhes
-      </Typography>
-      <Grid container spacing={2} columns={12}>
-        <Grid size={{ xs: 12, lg: 9}}>
-          <DataTable />
-        </Grid>
-        <Grid size={{ xs: 12, lg: 3}}>
-          <Stack gap={2} direction={{ xs: 'column', sm: 'row', lg: 'column' }}>
-            {/* Pode adicionar filtros ou cards extras */}
-          </Stack>
         </Grid>
       </Grid>
 
